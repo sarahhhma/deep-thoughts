@@ -1,0 +1,128 @@
+<!--Random Quote Machine-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<title>Random Quote Generator</title>
+<style>
+    body {
+    background-image: url("https://images.unsplash.com/photo-1482685945432-29a7abf2f466?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2689&q=80");
+    max-height: 100vh;
+    max-width: 100vw;
+}
+h1{
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-shadow: 3px 3px 2px rgb(129, 49, 49);
+    padding-top: 50px;
+    font-style: oblique;
+}
+h2{
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-shadow: 3px 3px 2px rgb(129, 49, 49);
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+.text, .author {
+    color: rgb(129, 47, 47);
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 3px 3px 8px rgb(144, 127, 127);
+    padding-bottom: 20px;
+}
+p, ol {
+    color: white;
+    text-shadow: 3px 3px 6px black;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+.quotes{
+  grid-column-start: col4;
+  grid-column-end: col5;
+  grid-row-start: row2;
+  grid-row-end: row5;
+  font-size: 1.3em;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #858585;
+  text-align: center;
+  margin: 0;
+  height: 300px;
+}
+.btn-info, .btn-info:hover, .btn-info:active, .btn-info:visited {
+  color: white !important;
+    background-color: rgb(129, 47, 47) !important;
+    border:rgba(144, 127, 127, .7);
+}
+</style>
+    </head>
+    <body>
+        <h1>Deep Thoughts</h1>
+            <h2>by Jack Handey</h2>
+        <div class="wrapper" id="quote-box">
+            <div class="quotes">
+            <div class="text" id="text">
+            </div>
+            <div class="author" id="author">
+            </div>
+            </div>
+            <div class="buttons d-grid gap-3 col-6 mx-auto">
+            <button type="button" class="btn btn-info" id="new-quote">New Quote</button>
+            </div>
+        </div>
+    <!--Instructions from FCC-->
+
+<script>
+$(document).ready(function() {
+  // Array of objects containing quotes and authors
+  var quotes = [
+    {text: "If you go flying back through time, and you see somebody else flying forward into the future, it’s probably best to avoid eye contact.", author: "Jack Handey"},
+    {text: "If I ever get real rich, I hope I’m not real mean to poor people, like I am now.", author: "Jack Handey"},
+    {text: "If trees could scream, would we be so cavalier about cutting them down? We might, if they screamed all the time, for no good reason.", author: "Jack Handey"},
+    {text: "Sometimes I think you have to march right in and demand your rights, even if you don’t know what your rights are, or who the person is you’re talking to. Then on the way out, slam the door.", author: "Jack Handey"},
+    {text: "I can picture in my mind a world without war, a world without hate. And I can picture us attacking that world, because they’d never expect it.", author: "Jack Handey"},
+    {text: "Before you criticize someone, you should walk a mile in their shoes. That way when you criticize them, you are a mile away from them and you have their shoes.", author: "Jack Handey"},
+    {text: "To me, boxing is like a ballet, except there’s no music, no choreography, and the dancers hit each other.", author: "Jack Handey"},
+    {text: "Do you know what happens when you slice a golf ball in half? Someone gets mad at you. I found this out the hard way.", author: "Jack Handey"},
+    {text: "I hope if dogs ever take over the world, and they chose a king, they don’t just go by size, because I bet there are some Chihuahuas with some good ideas.", author: "Jack Handey"},
+    {text: "Dad always thought laughter was the best medicine, which I guess is why several of us died of tuberculosis.", author: "Jack Handey"},
+    {text: "Maybe in order to understand mankind, we have to look at the word itself: 'Mankind'. Basically, it's made up of two separate words -'mank' and 'ind'. What do these words mean ? It's a mystery, and that's why so is mankind.", author: "Jack Handey"},
+    {text: "It takes a big man to cry, but it takes a bigger man to laugh at that man.", author: "Jack Handey"},
+    {text: "The face of a child can say it all, especially the mouth part of the face.", author: "Jack Handey"},
+    {text: "Ambition is like a frog sitting on a Venus Flytrap. The flytrap can bite and bite, but it won't bother the frog because it only has little tiny plant teeth. But some other stuff could happen and it could be like ambition.", author: "Jack Handey"},
+    {text: "What is it that makes a complete stranger dive into an icy river to save a solid gold baby? Maybe we'll never know.", author: "Jack Handey"},
+    {text: "We tend to scoff at the beliefs of the ancients. But we can't scoff at them personally, to their faces, and this is what annoys me.", author: "Jack Handey"},
+    {text: "You know what would make a good story? Something about a clown who makes people happy, but inside he's real sad. Also, he has severe diarrhea.", author: "Jack Handey"},
+    {text: "If you ever teach a yodeling class, probably the hardest thing is to keep the students from just trying to yodel right off. You see, we build to that.", author: "Jack Handey"},
+    {text: "Anytime I see something screech across a room and latch onto someone's neck, and the guy screams and tries to get it off, I have to laugh, because what is that thing?", author: "Jack Handey"},
+    {text: "Contrary to what most people say, the most dangerous animal in the world is not the lion or the tiger or even the elephant. It's a shark riding on an elephant's back, just trampling and eating everything they see.", author: "Jack Handey"},
+    {text: "If you saw two guys named Hambone and Flippy, which one would you think liked dolphins the most? I'd say Flippy, wouldn't you? You'd be wrong, though. It's Hambone.", author: "Jack Handey"},
+    {text: "Laurie got offended that I used the word 'puke.' But to me, that's what her dinner tasted like.", author: "Jack Handey"}
+    // Add as many quotes as you want
+  ];
+  
+  // Randomly select a quote and author
+  var randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  
+  // Display the initial quote and author
+  $('#text').text(randomQuote.text);
+  $('#author').text(randomQuote.author);
+  
+  // Generate a new random quote and author when the New Quote button is clicked
+  $('#new-quote').click(function() {
+    var newRandomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    $('#text').text(newRandomQuote.text);
+    $('#author').text(newRandomQuote.author);
+  });
+
+});
+</script>
+</body>
+    </html>
